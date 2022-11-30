@@ -10,7 +10,7 @@ def himawari_download(year, month, day, hour, minute, band, working_dir_path='./
     ftp_address = 'sc-trans.nict.go.jp'
 
     # ftp接続
-    ftp = ftplib.FTP(ftp_address)
+    ftp = ftplib.FTP(ftp_address, timeout=60)
     ftp.set_pasv('true')
     ftp.login(ftp_user, ftp_pass)
 
