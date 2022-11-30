@@ -26,5 +26,6 @@ def himawari_download_check(dir_path):
     summary= days_df.groupby('Date(JST)').size()
     return summary
 # %%
-date = himawari_download_check('T:/Uda/Himawari_tif/')
-date
+if __name__=='__main__':
+    date = himawari_download_check('T:/Uda/Himawari_tif/')
+    date
