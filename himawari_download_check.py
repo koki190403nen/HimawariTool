@@ -16,13 +16,15 @@ def himawari_download_check(dir_path):
         (pandas.DataFrame): サマリ
     """
     file_ls = glob.glob(f'{dir_path}/*.tif')
-    check_df = pd.DataFrame()
-    for i, file_path in enumerate(file_ls):
-        date_str = file_path.split('_')[-5]+'-'+file_path.split('_')[-4]
-        date = datetime.datetime.strptime(date_str, '%Y%m%d-%H%M') +datetime.timedelta(hours=9)
-        check_df.loc[i, 'date'] = date
-        check_df.loc[i, 'days(JST)'] = date.strftime('%Y/%m/%d')
-    return check_df.groupby('days(JST)').size()
+    check_df = pd.DataFrame({'path':file_ls})
+    split_df = check_df['path'].str.split('_', expand=True)
+    datestr_df = split_df.iloc[:,-5]+split_df.iloc[:,-4]
+    JSTdate_df = pd.to_datetime(pd.to_datetime(datestr_df).values) + datetime.timedelta(hours=9)
+    days = JSTdate_df.year.astype(str) + '/' + JSTdate_df.month.astype(str) + '/' + JSTdate_df.day.astype(str)
+
+    days_df = pd.DataFrame({'Date(JST)':days})
+    summary= days_df.groupby('Date(JST)').size()
+    return summary
 # %%
-if __name__=='__main__':
-    print(himawari_download_check('T:/Uda/Himawari_tif/'))
+date = himawari_download_check('T:/Uda/Himawari_tif/')
+date
