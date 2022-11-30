@@ -19,8 +19,8 @@ def himawari_download_check(dir_path):
     check_df = pd.DataFrame({'path':file_ls})
     split_df = check_df['path'].str.split('_', expand=True)
     datestr_df = split_df.iloc[:,-5]+split_df.iloc[:,-4]
-    JSTdate_df = pd.to_datetime(pd.to_datetime(datestr_df).values) + datetime.timedelta(hours=9)
-    days = JSTdate_df.year.astype(str) + '/' + JSTdate_df.month.astype(str) + '/' + JSTdate_df.day.astype(str)
+    JSTdate_arr = pd.to_datetime(pd.to_datetime(datestr_df).values) + datetime.timedelta(hours=9)
+    days = JSTdate_arr.strftime('%Y/%m/%d')
 
     days_df = pd.DataFrame({'Date(JST)':days})
     summary= days_df.groupby('Date(JST)').size()
@@ -28,4 +28,4 @@ def himawari_download_check(dir_path):
 # %%
 if __name__=='__main__':
     date = himawari_download_check('T:/Uda/Himawari_tif/')
-    date
+    print(date)
