@@ -142,6 +142,7 @@ class HimawariFuchuDownload:
         """
         print(f'start re-download from {log_path}')
         failed_ls = list(set(list(pd.read_table(log_path, header=None).iloc[:,0].values)))
+        failed_ls.sort()
         for failed_path in failed_ls:
             date = datetime.datetime.strptime(failed_path, '%Y/%m/%d-%H:%M')
             self.download_manydays(
