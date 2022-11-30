@@ -141,9 +141,9 @@ class HimawariFuchuDownload:
             download_band_ls (Array like, optional): ダウンロードしたいバンド. Defaults to range(1, 16+1).
         """
         print(f'start re-download from {log_path}')
-        df = pd.read_table(log_path, header=None)
-        for i, row in df.iterrows():
-            date = datetime.datetime.strptime(row[0], '%Y/%m/%d-%H:%M')
+        failed_ls = list(set(list(pd.read_table(log_path, header=None).iloc[:,0].values)))
+        for failed_path in failed_ls:
+            date = datetime.datetime.strptime(failed_path, '%Y/%m/%d-%H:%M')
             self.download_manydays(
                 start=date, end=date+datetime.timedelta(minutes=10),
                 download_hour_ls=download_hour_ls,
