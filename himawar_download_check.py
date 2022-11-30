@@ -22,7 +22,7 @@ def himawari_download_check(dir_path):
         date = datetime.datetime.strptime(date_str, '%Y%m%d-%H%M') +datetime.timedelta(hours=9)
         check_df.loc[i, 'date'] = date
         check_df.loc[i, 'days(JST)'] = date.strftime('%Y/%m/%d')
-    return check_df.groupby('days').size()
+    return check_df.groupby('days(JST)').size()
 # %%
 if __name__=='__main__':
     print(himawari_download_check('T:/Uda/Himawari_tif/'))
