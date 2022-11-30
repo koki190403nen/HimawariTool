@@ -1,3 +1,3 @@
 from .main_single import *
 from .Himawai_Fuchu import *
-from .himawar_download_check import *
+from .himawari_download_check import *
