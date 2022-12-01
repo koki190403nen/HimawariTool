@@ -95,7 +95,7 @@ class DownloadUnzipClip:
 
         os.makedirs(self.working_dir_path, exist_ok=True)
         # ftp接続
-        ftp = ftplib.FTP(self.ftp_address, timeout=60)
+        ftp = ftplib.FTP(self.ftp_address, timeout=30)
         ftp.set_pasv('true')
         ftp.login(self.ftp_user, self.ftp_pass)
 
