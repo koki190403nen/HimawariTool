@@ -37,7 +37,7 @@ class DownloadUnzipClip:
 
         self.HIMAWARI_Num = 8  # ひまわり何号機を使うか指定
 
-        self.working_dir_path = None  # ワーキングディレクトリ. Defaults to './working/'.
+        self.working_dir_path = None  # ワーキングディレクトリのパス
 
     def download_unzip_clip(self, date, band, out_dir_path, working_dir_path='./working/'):
         """指定した日付・バンドのデータをダウンロード・解凍・クリッピングする
