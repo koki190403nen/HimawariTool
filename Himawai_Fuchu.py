@@ -4,6 +4,7 @@ from matplotlib import pyplot as plt
 import pandas as pd
 import datetime
 from . import *
+from .download_unzip_clip import DownloadUnzipClip
 import glob
 import os
 
@@ -64,6 +65,7 @@ class HimawariFuchuDownload:
         # ダウンロードする日付の10分間隔の日付をリスト化
         download_date_ls = \
             pd.to_datetime(np.arange(start, end, datetime.timedelta(minutes=10)))
+        duc = DownloadUnzipClip()
 
         for download_dateJST in download_date_ls:
             if download_dateJST.hour not in hour_ls:
@@ -75,7 +77,7 @@ class HimawariFuchuDownload:
                 self._clean_working_dir()  # workingディレクトリをクリーニング
                 
                 try:
-                    c = download_unzip_clip(download_dateGMT, band, self.out_dir_path, self.working_dir_path)  # 指定バンド,指定日時のデータをダウンロード
+                    c = duc.download_unzip_clip(download_dateGMT, band, self.out_dir_path, self.working_dir_path)  # 指定バンド,指定日時のデータをダウンロード
                     count+=c
                 except:
                     with open(self.log_path, 'a') as f:
