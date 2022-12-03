@@ -10,12 +10,14 @@ import os
 
 # %%
 class HimawariFuchuDownload:
-    def __init__(self, out_dir_path, working_dir_path='./working/', log_path='./log.txt'):
+    def __init__(self, out_dir_path, working_dir_path='./working/', log_path='./log.txt', Himawari_num=8):
         """府中のひまわりデータをダウンロードする
 
         Args:
             out_dir_path (str): 出力先ディレクトリ
             working_dir_path (str, optional): workingディレクトリ. Defaults to './working/'.
+            log_path (str, path): 出力ログパス. Defaults to './log.txt'
+            Himawari_num (int): ひまわり○号機. Defaults to 8.
         """
         self.out_dir_path = out_dir_path
         self.working_dir_path = working_dir_path
@@ -23,7 +25,7 @@ class HimawariFuchuDownload:
         self.download_hour_ls = None  # ダウンロードするhourのリスト
         self.band_ls = None  # ダウンロードするバンドのリスト
         self.now_date = None
-
+        self.Himawari_num = Himawari_num  # ひまわり○号機
     
     def _clean_working_dir(self):
         # 作業用ディレクトリをクリーニング
@@ -65,7 +67,7 @@ class HimawariFuchuDownload:
         # ダウンロードする日付の10分間隔の日付をリスト化
         download_date_ls = \
             pd.to_datetime(np.arange(start, end, datetime.timedelta(minutes=10)))
-        duc = DownloadUnzipClip()
+        duc = DownloadUnzipClip(Himawari_num=self.Himawari_num)
 
         for download_dateJST in download_date_ls:
             if download_dateJST.hour not in hour_ls:

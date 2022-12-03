@@ -22,7 +22,7 @@ import shutil
 
 # ftpサーバー最下層のディレクトリ内のファイルに対しバッチ処理
 class DownloadUnzipClip:
-    def __init__(self):
+    def __init__(self, Himawari_num=8):
         # メタ情報
         # clipしたい範囲を座標で指定
         # 関東平野周辺の場合、広めにとると(lat_min=33.5, lat_max=38.5, lon_min=137, lon_max=142)
@@ -35,7 +35,7 @@ class DownloadUnzipClip:
         self.ftp_pass= 'hWzL92BM'  # FTPパスワード
         self.ftp_address = 'sc-trans.nict.go.jp'  # FTPアドレス
 
-        self.HIMAWARI_Num = 8  # ひまわり何号機を使うか指定
+        self.HIMAWARI_Num = Himawari_num  # ひまわり何号機を使うか指定
 
         self.working_dir_path = None  # ワーキングディレクトリのパス
 
