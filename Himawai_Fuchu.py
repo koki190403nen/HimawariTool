@@ -51,7 +51,7 @@ class HimawariFuchuDownload:
         self.download_manydays(start=date, end=end_date, download_hour_ls=download_hour_ls, download_band_ls=download_band_ls)
         return self
 
-    def download_manydays(self, start, end, download_hour_ls=range(0, 23), download_band_ls=range(1, 16+1)):
+    def download_manydays(self, start, end, download_hour_ls=range(0, 23+1), download_band_ls=range(1, 16+1)):
         """連続する複数の日のデータをダウンロードする.
 
         Args:
